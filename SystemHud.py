@@ -5,11 +5,15 @@ from GuiBuilder import GuiBuilder
 from usbridge import USBridge
 from utime import sleep_ms
 
+turnOffScreen = 0
+
 #begin functions
 def main():
-
+     
+    msg = "hello_friend"
+    if turnOffScreen: return
     #timer_start = time.ticks_ms()
-    guiBuilder.initAnimation()
+    #guiBuilder.initAnimation()
     sleep_ms(2000)
     while True:
         try:
@@ -18,13 +22,14 @@ def main():
                 #print("tick tock")
                 #timer_start = time.ticks_ms()
 
-            oled.text("HELLO_FRIEND",15,30)
+            oled.text(msg,15,30)
             oled.pixel(0,0,1)
             oled.pixel(10,10,1)
 
             serialMsg = usbridge.read()
             if(serialMsg != ""):
-                print(serialMsg)
+                print("#" + serialMsg)	#hack for flushing
+                msg = serialMsg
                 
             oled.show()
         except KeyboardInterrupt:
@@ -40,7 +45,7 @@ if __name__ == "__main__":
     spi = SPI(0, 100000, mosi=Pin(19), sck=Pin(18))
     oled = SSD1306_SPI(128, 64, spi, Pin(17),Pin(20), Pin(16)) #WIDTH, HEIGHT, spi, dc,rst, cs
     oled.rotate(180)
-    guiBuilder = GuiBuilder(oled)
+    guiBuilder = GuiBuilder(oled,["top","kek"])
     usbridge = USBridge()
     
     main()

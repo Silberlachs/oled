@@ -5,14 +5,26 @@ class USBridge:
     
     def __init__(self):
         print("class created")
+        self.input = ""
+        self.button = ""
+        self.flushbuffer = 0
+        self.poll_object = select.poll()
+        self.poll_object.register(sys.stdin,1)
         
     def read(self):
-        poll_object = select.poll()
-        poll_object.register(sys.stdin,1)
+        
+        if self.poll_object.poll(0):
+            self.button = sys.stdin.read(1)
 
-        if poll_object.poll(0):
-           #read as character
-           ch = sys.stdin.read(1)
-           if(ch == "\n"):
-                   print("enter pressed")
-           print ('%d' %ch)
+            if(self.button == "\n"):
+                if(self.flushbuffer < 1):
+                    self.flushbuffer += 1
+                    return ""
+                else:
+                    payload = self.input
+                    self.flushbuffer = 0
+                    self.input = ""
+                    return payload
+                
+            self.input += self.button
+        return ""
