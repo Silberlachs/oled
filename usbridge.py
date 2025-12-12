@@ -17,5 +17,7 @@ class USBridge:
             while(1):
                 payload += sys.stdin.read(1)
                 if(payload[len(payload)-1] == "\n"):
+                    #sys.stdout.write("payload is " + payload[:-1])
                     return payload[:-1]
         return ""
+    
