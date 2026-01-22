@@ -1,19 +1,19 @@
 import framebuf
 from LoadingScreen import LoadingScreen
-import logo
+import imageLib
 from utime import sleep_ms
 
 class GuiBuilder:
     
     def __init__(self, oled):
         self.oled 		= oled
-        self.nameStr 	= "Birdflip Studios "
+        self.nameUpper 	= "Renraku"
+        self.nameUnder  = "Computersystems"
         self.conStr 	= "Connected !"
-        #self.test 		= "ASDFGHHJKLÖ"
         self.loadingScreen = LoadingScreen(self.oled)
         
     def showLogo(self):
-        buffer,img_res = logo.get_img()
+        buffer,img_res = imageLib.get_parrot()
         fb = framebuf.FrameBuffer(buffer, img_res[0], img_res[1], framebuf.MONO_HMSB)
         self.oled.rotate(False)
         self.oled.blit(fb, 0, 0)
@@ -31,8 +31,13 @@ class GuiBuilder:
         self.oled.show()
         
         #print out our proud name of birdflip, greatest of all studios
-        for charCount in range(0,len(self.nameStr)):
-            self.oled.text(self.nameStr[:charCount],0,32,0)
+        for charCount in range(0,len(self.nameUpper) +1):
+            self.oled.text(self.nameUpper[:charCount],32,10,0)
+            sleep_ms(50)
+            self.oled.show()
+            
+        for charCount in range(0,len(self.nameUnder) +1):
+            self.oled.text(self.nameUnder[:charCount],4,32,0)
             sleep_ms(50)
             self.oled.show()
             
@@ -41,6 +46,9 @@ class GuiBuilder:
 
     def showLoadingScreen(self):
         self.loadingScreen.buildScreen()
+        
+    def updateLoadingAnimation(self):
+        self.loadingScreen.update()
         
     def showConMsg(self):
         #delete screen
