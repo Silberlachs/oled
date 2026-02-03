@@ -42,7 +42,7 @@ class LoadingScreen:
     # we create a simple particle system
     def spawnParticle(self):
         num = randint(12,30)
-        self.particles.append([0,num])
+        self.particles.append([-20,num])
    
     def spawnCityTile(self):
         self.cityTilePos.append(-24)
