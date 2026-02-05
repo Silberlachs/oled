@@ -7,7 +7,7 @@ from utime import sleep_ms
 
 def main():
     
-    #guiBuilder.showLogo()
+    guiBuilder.showLogo()
     guiBuilder.showLoadingScreen()
     payload = getMsg()
     
