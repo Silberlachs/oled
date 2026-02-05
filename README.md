@@ -7,6 +7,7 @@ Features:
 - Display Data sent to device, Format: $:[VALUENAME]# to set headings, values in order to be displayed, seperated by #
 - A cute animation featuring a bird flying through town
 - A gauge to display RAM usage
+- Loading of Sprites from Memory to be used in animations
 
 The project is intended to be used in conjunction with SensoryBridge Project ( https://github.com/Silberlachs/SensorBridge )
 
