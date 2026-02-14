@@ -64,4 +64,4 @@ if __name__ == "__main__":
     usbridge = USBridge()
     
     while True:
-        initialized = main()
+        main()
