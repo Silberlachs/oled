@@ -122,7 +122,7 @@ class GuiBuilder:
         self.oled.show()
         return
     
-    #hardcoded, add generic value engine
+    #hardcoded
     def updateValues(self,values):
         
         if self.initialized == False:
